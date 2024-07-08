@@ -1,9 +1,10 @@
 import { QuartzTransformerPlugin } from "../types"
+import { rehypeLeaflet } from "rehype-leaflet"
 
 interface Options {
 }
 
-export const Leaflet: QuartzTransformerPlugin<Options> = (opts?: Options) => {
+export const Leaflet: QuartzTransformerPlugin = () => {
     return {
         name: "Leaflet",
         markdownPlugins() {
@@ -11,7 +12,7 @@ export const Leaflet: QuartzTransformerPlugin<Options> = (opts?: Options) => {
         },
         htmlPlugins() {
 
-            return []
+            return [rehypeLeaflet]
 
         },
         externalResources() {
@@ -23,7 +24,7 @@ export const Leaflet: QuartzTransformerPlugin<Options> = (opts?: Options) => {
                 js: [
                     {
                         src: "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
-                        loadTime: "afterDOMReady",
+                        loadTime: "beforeDOMReady",
                         contentType: "external",
                     },
                 ],
